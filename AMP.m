@@ -61,13 +61,11 @@ z = y;
 c = norm(z,2)^2 ./ m + var(y-A*xhat);
 for it = 1:T
     %% Iterative updates
-    time_wave_emd = 1;
+    time_wave_emd = 0;
     if (time_wave_emd == 1)
         time_version;
-    elseif (time_wave_emd == 2)
+    elseif (time_wave_emd == 0)
         wavelet_version;
-    elseif (time_wave_emd == 3)
-        emd_version;
     else
         fprintf(1, 'Choose a valid method please...\n');
         pause;
