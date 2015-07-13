@@ -26,8 +26,7 @@ clear; close all;
 
 % Sparse signal
 N = 100;
-load('mdata/picture.mat'); % P
-I = imread('image/lecklace.png');
+I = imread('image/lena.png');
 P = I(1:N,1:N,1);
 P = P';
 x = [];
@@ -49,8 +48,6 @@ tol = 10^(-4);
 % Generate measurement matrix
 A = (1/sqrt(m)).*randn(m, n);
 y = A*x;
-%% calling download function
-% calling_test;
 %% AMP
 fprintf(1, 'AMP: \n');
 h = figure;
@@ -74,23 +71,20 @@ for it = 1:T
     if(norm(xhat-xhat_old)/norm(xhat_old) < tol)
         break;
     end
-    % plot image on each iteration
-%     plot_image(xhat, N);
-    % plot MSE curve
     draw_mse;
 end
 fprintf(1, '||xhat - xhat_old||./||xhat_old|| =  %.4f\n',...
             norm(xhat-xhat_old)./norm(xhat_old));
-% reconstruct P
+%% reconstruct P
 newP = [];
 for ii = 1:N
     newP = [newP xhat(N*(ii-1)+1:N*ii,1)];
 end
-% showing the original image
+%% showing the original image
 figure
 imagesc(P)
 colormap gray
-% showing reconstructed image2
+%% showing reconstructed image2
 figure
 imagesc(newP)
 colormap gray
